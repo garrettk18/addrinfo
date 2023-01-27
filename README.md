@@ -1,6 +1,18 @@
 # `addrinfo`: simple exercise of the addrinfo(3) function
 
-## Usage:
+## Building
+
+Make sure you have autoconf and automake installed. On debian/ubuntu, try `sudo apt install autoconf automake build-essential`
+
+From the top level addrinfo directory:  
+```
+autoreconf -si
+./configure
+make
+sudo make install
+```
+
+## Usage
 src/addrinfo \<hostname\>
 
 ## Contact
