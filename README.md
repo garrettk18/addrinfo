@@ -13,7 +13,8 @@ sudo make install
 ```
 
 ## Usage
-`addrinfo \<hostname\>`
+
+`addrinfo <hostname>`
 
 ## Contact
 
