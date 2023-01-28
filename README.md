@@ -5,10 +5,10 @@
 Make sure you have autoconf and automake installed. On debian/ubuntu, try `sudo apt install autoconf automake build-essential`
 
 From the top level addrinfo directory:  
-```
-autoreconf -si
-./configure
-make
+```bash
+autoreconf -si&&
+./configure&&
+make&&
 sudo make install
 ```
 
