@@ -1,4 +1,4 @@
-# `addrinfo`: simple exercise of the addrinfo(3) function
+# addrinfo: simple exercise of the `getaddrinfo(3)` function
 
 ## Building
 
