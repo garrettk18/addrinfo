@@ -16,6 +16,10 @@ sudo make install
 
 `addrinfo <hostname>`
 
+## addrinfo2
+
+The `addrinfo2` program is is the same as `addrinfo`, with the exception that it queries localhost.
+
 ## Contact
 
 If you have any problems, please file issues on this repository.
