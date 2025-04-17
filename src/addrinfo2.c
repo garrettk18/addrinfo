@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
       parseaddrinfo(i);
     } //for
     freeaddrinfo(res);
-   } //if
-   else {
+  } //if
+  else {
     usage();
-   } //else, wrong number of args
-   return 0;
+  } //else, wrong number of args
+  return 0;
 } //main
 
 
@@ -32,7 +32,6 @@ void parseaddrinfo(const struct addrinfo *ai)
   char *ipstr = NULL;
   struct sockaddr_in *ipv4 = (struct sockaddr_in *)ai->ai_addr;
   struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)ai->ai_addr;
-
   printf("Socket family: ");
   switch(ai->ai_family) {
     case AF_INET: 
@@ -58,6 +57,9 @@ void parseaddrinfo(const struct addrinfo *ai)
     break;
     case SOCK_DGRAM:
       printf("datagram");
+    break;
+    case SOCK_SEQPACKET:
+      printf("seqpacket");
     break;
     case SOCK_RAW:
       printf("raw");

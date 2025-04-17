@@ -59,6 +59,9 @@ void parseaddrinfo(const struct addrinfo *ai)
     case SOCK_DGRAM:
       printf("datagram");
     break;
+    case SOCK_SEQPACKET:
+      printf("seqpacket");
+    break;
     case SOCK_RAW:
       printf("raw");
     break;
