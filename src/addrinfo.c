@@ -35,7 +35,7 @@ else if (ipv4_only && !ipv6_only) {
 else {
 hints.ai_family = AF_INET6;
 } //else
-    //hints.ai_flags = AI_CANONNAME;
+    hints.ai_flags = AI_CANONNAME;
     struct addrinfo *res = NULL;
     int gaistatus = getaddrinfo(argv[argc - 1], NULL, &hints, &res);
     if (gaistatus) {
