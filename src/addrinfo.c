@@ -2,10 +2,40 @@
 
 int main(int argc, char *argv[])
 {
-  if (argc == 2) {
+ int opt = 0;
+ int ipv4_only = 0;
+  int ipv6_only = 0;
+const char *optstring = "46";
+while ((opt = getopt(argc, argv, optstring)) != -1) {
+switch(opt) {
+case '4':
+ipv4_only = 1;
+ipv6_only = 0;
+break;
+case '6':
+ipv6_only = 1;
+ipv4_only = 0;
+break;
+default:
+usage();
+break;
+} //switch
+} //while
+  if (optind == argc ) {
+fprintf(stderr, "Error: option required after arguments\n");
+usage();
+  } //if
     struct addrinfo hints;
     memset(&hints, 0, sizeof(hints));
-    //hints.ai_family = AF_INET6;
+if (!ipv4_only && !ipv6_only) {
+hints.ai_family = AF_UNSPEC;
+} //if
+else if (ipv4_only && !ipv6_only) {
+    hints.ai_family = AF_INET;
+} //if
+else {
+hints.ai_family = AF_INET6;
+} //else
     hints.ai_flags = AI_CANONNAME;
     struct addrinfo *res = NULL;
     int gaistatus = getaddrinfo(argv[1], NULL, &hints, &res);
@@ -18,10 +48,6 @@ int main(int argc, char *argv[])
       parseaddrinfo(i);
     } //for
     freeaddrinfo(res);
-  } //if
-  else {
-    usage();
-  } //else, wrong number of args
   return 0;
 } //main
 
