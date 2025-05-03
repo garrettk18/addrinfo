@@ -28,7 +28,7 @@ usage();
     struct addrinfo hints;
     memset(&hints, 0, sizeof(hints));
 if (!ipv4_only && !ipv6_only) {
-hints.ai_family = AF_UNSPEC;
+hints.ai_family = 0;
 } //if
 else if (ipv4_only && !ipv6_only) {
     hints.ai_family = AF_INET;
