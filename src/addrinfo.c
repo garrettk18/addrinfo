@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    rr = 0; //Suppress builtin getopt diagnostics
+    opterr = 0; //Suppress builtin getopt diagnostics
     int opt = 0;
     int ipv4_only = 0;
     int ipv6_only = 0;
