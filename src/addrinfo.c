@@ -2,9 +2,14 @@
 
 int main(int argc, char *argv[])
 {
+	opterr = 0; //Suppress builtin getopt diagnostics
  int opt = 0;
  int ipv4_only = 0;
   int ipv6_only = 0;
+  if (argc == 1) {
+	  usage();
+	  exit(EXIT_FAILURE);
+  } //if
 const char *optstring = "46";
 while ((opt = getopt(argc, argv, optstring)) != -1) {
 switch(opt) {
@@ -16,14 +21,21 @@ case '6':
 ipv6_only = 1;
 ipv4_only = 0;
 break;
+case '?':
+fprintf(stderr,"Unrecognized option -%c\n", optopt);
+usage();
+exit(EXIT_FAILURE);
+break;
 default:
 usage();
+exit(EXIT_FAILURE);
 } //switch
 } //while
-  if (optind == argc ) {
-fprintf(stderr, "Error: option required after arguments\n");
-usage();
-  } //if
+if (optind >= argc) {
+	fprintf(stderr, "Missing hostname argument.\n");
+	usage();
+	exit(EXIT_FAILURE);
+} //if
     struct addrinfo hints;
     memset(&hints, 0, sizeof(hints));
 if (!ipv4_only && !ipv6_only) {
@@ -106,5 +118,7 @@ void parseaddrinfo(const struct addrinfo *ai)
 
 void usage(void)
 {
-  printf("Usage: %s <hostname>\n", program_invocation_name);
+  printf("Usage: %s [-46] <hostname>\n", program_invocation_name);
+  printf("-4: IPv4-only\n");
+  printf("-6: IPv6-only\n");
 } //usage
