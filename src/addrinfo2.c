@@ -13,10 +13,6 @@ int main(int argc, char *argv[])
     #endif
     int ipv4_only = 0;
     int ipv6_only = 0;
-    if (argc == 1) {
-        usage();
-        exit(EXIT_FAILURE);
-    } //if
     const char *optstring = "46";
     #ifdef _WIN32
         int i = 0;
@@ -29,6 +25,11 @@ int main(int argc, char *argv[])
                 ipv6_only = 1;
                 ipv4_only = 0;
             } //else if
+else if (argv[i][0] == '-') {
+fprintf(stderr, u8"Unrecognized option %s\n", argv[i]);
+usage();
+exit(EXIT_FAILURE);
+} //else if
             else {
                 //The argument is a hostname. Break out of the loop and preserve the value of i for later.
                 break;
@@ -148,7 +149,7 @@ void parseaddrinfo(const struct addrinfo *ai)
 
 void usage(void)
 {
-    printf("Usage: %s [-46] <hostname>\n", "addrinfo.exe");
+    printf("Usage: %s [-46]\n", "addrinfo.exe");
     printf("-4: IPv4-only\n");
     printf("-6: IPv6-only\n");
 } //usage
