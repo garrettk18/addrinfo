@@ -117,25 +117,25 @@ void parseaddrinfo(const struct addrinfo *ai)
     putchar('\n');
     printf("Socket type: ");
     switch(ai->ai_socktype) {
-      case SOCK_STREAM:
-        printf("stream");
-      break;
-      case SOCK_DGRAM:
-        printf("datagram");
-      break;
-      case SOCK_SEQPACKET:
-        printf("seqpacket");
-      break;
-      case SOCK_RAW:
-        printf("raw");
-      break;
-      default:
-        printf("unknown");
+        case SOCK_STREAM:
+            printf("stream");
+        break;
+        case SOCK_DGRAM:
+            printf("datagram");
+        break;
+        case SOCK_SEQPACKET:
+            printf("seqpacket");
+        break;
+        case SOCK_RAW:
+            printf("raw");
+        break;
+        default:
+            printf("unknown");
     } //switch
     putchar('\n');
     if (!ipstr) {
-      perror("inet_ntop");
-      return;
+        perror("inet_ntop");
+        return;
     } //if
     printf("IP address: %s\n", ipstr);
     #ifdef _WIN32
