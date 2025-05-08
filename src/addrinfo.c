@@ -1,4 +1,4 @@
-#ifdef _WIN32
+#if (defined(_WIN32) && defined(_MSC_VER))
     #pragma comment (lib, "Ws2_32.lib")
     #pragma comment (lib, "Mswsock.lib")
     #pragma comment (lib, "AdvApi32.lib")
@@ -7,17 +7,15 @@
 
 int main(int argc, char *argv[])
 {
-    #ifndef _WIN32
-        opterr = 0; //Suppress builtin getopt diagnostics
-        int opt = 0;
-    #endif
     int ipv4_only = 0;
     int ipv6_only = 0;
     if (argc == 1) {
         usage();
         exit(EXIT_FAILURE);
     } //if
-    const char *optstring = "46";
+    #ifndef _WIN32
+        const char *optstring = "46";
+#endif
     int host_arg = 0;
     #ifdef _WIN32
         int i = 0;
