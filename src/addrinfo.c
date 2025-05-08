@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     } //if
     const char *optstring = "46";
+    int host_arg = 0;
     #ifdef _WIN32
         int i = 0;
         for (i = 1; i < argc; i++) {
@@ -29,11 +30,21 @@ int main(int argc, char *argv[])
                 ipv6_only = 1;
                 ipv4_only = 0;
             } //else if
-            else {
-                //The argument is a hostname. Break out of the loop and preserve the value of i for later.
+            else if (argv[i][0] != '-') {
+                //The argument is a hostname. Preserve the value of i for later.
+                host_arg = i;
                 break;
+            } //else if
+            else {
+                fprintf(stderr, u8"Unrecognized option %s\n", argv[i]);
+                exit(EXIT_FAILURE);
             } //else
         } //for
+        if (0 == host_arg) {
+            fprintf(stderr, u8"Missing hostname argument.\n");
+            usage();
+            exit(EXIT_FAILURE);
+        } //if
     WSADATA wsaData;
     int iResult;
     // Initialize Winsock
@@ -63,6 +74,7 @@ int main(int argc, char *argv[])
                     exit(EXIT_FAILURE);
             } //switch
         } //while
+        host_arg = optind;
         if (optind >= argc) {
             fprintf(stderr, "Missing hostname argument.\n");
             usage();
@@ -82,7 +94,7 @@ int main(int argc, char *argv[])
         } //else
         hints.ai_flags = AI_CANONNAME;
         struct addrinfo *res = NULL;
-        int gaistatus = getaddrinfo(argv[argc - 1], NULL, &hints, &res);
+        int gaistatus = getaddrinfo(argv[host_arg], NULL, &hints, &res);
         if (gaistatus) {
             fprintf(stderr, "getaddrinfo() Error: %s\n", gai_strerror(gaistatus));
             exit(EXIT_FAILURE);
