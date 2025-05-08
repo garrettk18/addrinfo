@@ -143,7 +143,11 @@ void parseaddrinfo(const struct addrinfo *ai)
       return;
     } //if
     printf("IP address: %s\n", ipstr);
-    printf("Address structure length in bytes: %zu\n", ai->ai_addrlen);
+    #ifdef _WIN32
+        printf("Address structure length in bytes: %zu\n", ai->ai_addrlen);
+    #else
+        printf("Address structure length in bytes: %d\n", ai->ai_addrlen);
+    #endif
     printf("Canonical name: %s\n", ai->ai_canonname);
 } //parseaddrinfo
 
