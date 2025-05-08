@@ -120,7 +120,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\addrinfo.c" />
-    <ClCompile Include="src\addrinfo2.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\addrinfo.h" />

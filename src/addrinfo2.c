@@ -74,11 +74,15 @@ void parseaddrinfo(const struct addrinfo *ai)
     return;
   } //if
   printf("IP address: %s\n", ipstr);
-  printf("Address length in bytes: %d\n", ai->ai_addrlen);
+  printf("Address length in bytes: %zu\n", ai->ai_addrlen);
   printf("Canonical name: %s\n", ai->ai_canonname);
 } //parseaddrinfo
 
 void usage(void)
 {
-  printf("Usage: %s\n", program_invocation_name);
+    #ifdef _WIN32
+        printf("Usage: %s\n", "addrinfo.exe");
+    #else
+        printf("Usage: %s\n", program_invocation_name);
+    #endif
 } /*usage*/
