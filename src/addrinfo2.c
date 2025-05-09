@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     int ipv6_only = 0;
 #ifndef _WIN32
         const char *optstring = "46";
-        int opt = 0;
     #endif
     #ifdef _WIN32
         int i = 0;
