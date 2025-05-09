@@ -17,9 +17,9 @@ int main(int argc, char *argv[])
         const char *optstring = "46";
 #endif
     int host_arg = 0;
-    int host_found = 0;
     #ifdef _WIN32
         int i = 0;
+    int host_found = 0;
         for (i = 1; i < argc; i++) {
             if (!strcmp("-4", argv[i])) {
                 ipv4_only = 1;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                 exit(EXIT_FAILURE);
             } //else
         } //for
-        if (0 == host_arg) {
+        if (0 == host_found) {
             fprintf(stderr, u8"Missing hostname argument.\n");
             usage();
             exit(EXIT_FAILURE);
