@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     } //if
     #else
+        int opt = 0;
         while ((opt = getopt(argc, argv, optstring)) != -1) {
             switch(opt) {
                 case '4':
