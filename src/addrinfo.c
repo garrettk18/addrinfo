@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
         const char *optstring = "46";
 #endif
     int host_arg = 0;
+    int host_found = 0;
     #ifdef _WIN32
         int i = 0;
         for (i = 1; i < argc; i++) {
@@ -28,13 +29,14 @@ int main(int argc, char *argv[])
                 ipv6_only = 1;
                 ipv4_only = 0;
             } //else if
-            else if (argv[i][0] != '-') {
+            else if (argv[i][0] != '-' && !host_found) {
                 //The argument is a hostname. Preserve the value of i for later.
                 host_arg = i;
-                break;
+                host_found = 1;
             } //else if
             else {
                 fprintf(stderr, u8"Unrecognized option %s\n", argv[i]);
+                usage();
                 exit(EXIT_FAILURE);
             } //else
         } //for
