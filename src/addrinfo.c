@@ -118,18 +118,18 @@ void parseaddrinfo(const struct addrinfo *ai)
     struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)ai->ai_addr;
     printf("Socket family: ");
     switch(ai->ai_family) {
-      case AF_INET: 
+        case AF_INET: 
         ipstr = (char *)inet_ntop(ai->ai_family, &(ipv4->sin_addr), ipbuf, INET_ADDRSTRLEN);
         printf("IPv4");
-      break;
-      case AF_INET6:
+    break;
+    case AF_INET6:
         ipstr = (char *)inet_ntop(ai->ai_family, &(ipv6->sin6_addr), ipbuf, INET6_ADDRSTRLEN);
         printf("IPv6");
-      break;
-      case AF_UNSPEC:
+    break;
+    case AF_UNSPEC:
         printf("unspecified");
-      break;
-      default:
+    break;
+    default:
         printf("unknown");
     } //switch
     putchar('\n');
